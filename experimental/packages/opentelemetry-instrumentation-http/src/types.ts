@@ -26,6 +26,7 @@ import {
 } from 'http';
 import * as url from 'url';
 import { InstrumentationConfig } from '@opentelemetry/instrumentation';
+import {MetricAttributes} from "@opentelemetry/api/build/esnext";
 
 export type IgnoreMatcher = string | RegExp | ((url: string) => boolean);
 export type HttpCallback = (res: IncomingMessage) => void;
@@ -52,7 +53,8 @@ export interface HttpCustomAttributeFunction {
   (
     span: Span,
     request: ClientRequest | IncomingMessage,
-    response: IncomingMessage | ServerResponse
+    response: IncomingMessage | ServerResponse,
+    metricsAttributes: MetricAttributes
   ): void;
 }
 
